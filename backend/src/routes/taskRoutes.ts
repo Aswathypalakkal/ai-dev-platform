@@ -1,0 +1,7 @@
+import { Router } from 'express';
+const router = Router();
+router.get('/', (req, res) => {
+  // TODO: implement task handling
+  res.json({ tasks: [] });
+});
+export default router;
