@@ -10,7 +10,8 @@ import { dockerService } from './services/dockerService';
 import fileRoutes from './routes/fileRoutes';
 import taskRoutes from './routes/taskRoutes';
 import aiRoutes from './routes/aiRoutes';
-import dockerRoutes from './routes/dockerRoutes';
+//import dockerRoutes from './routes/dockerRoutes';
+
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ app.use(express.json());
 app.use('/api/files', fileRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/ai', aiRoutes);
-app.use('/api/docker', dockerRoutes);
+//app.use('/api/docker', dockerRoutes);
 
 // Simple health endpoint
 app.get('/api/health', (_req, res) => {
@@ -41,11 +42,11 @@ const io = new SocketIOServer(server, {
 io.on('connection', (socket) => {
   console.log('Socket connected:', socket.id);
   const interval = setInterval(async () => {
-    const dockerStats = await dockerService.getStats();
+   // const dockerStats = await dockerService.getStats();
     socket.emit('metrics', {
       cpu: process.cpuUsage(),
       memory: process.memoryUsage(),
-      docker: dockerStats,
+     // docker: dockerStats,
     });
   }, 1000);
 
@@ -55,7 +56,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🚀 Server listening on http://localhost:${PORT}`);
 });
