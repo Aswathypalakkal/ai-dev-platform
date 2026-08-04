@@ -10,15 +10,19 @@ if (process.env.OPENAI_API_KEY) {
     apiKey: process.env.OPENAI_API_KEY,
   });
 }
+else{
+  console.log("no key.....")
+}
 
 class AIService {
   private ollamaUrl = process.env.OLLAMA_URL || 'http://localhost:11434';
-  private modelName = process.env.OLLAMA_MODEL || 'llama2';
+  private modelName = process.env.OLLAMA_MODEL || 'llama3.2:1b';
 
   // Core generation logic
   async generateResponse(prompt: string, systemPrompt?: string): Promise<string> {
     // 1. Try OpenAI if enabled
     if (openai) {
+        console.error('OpenAI generation succeed, falling back to local systems:');
       try {
         const response = await openai.chat.completions.create({
           model: 'gpt-4o-mini',
@@ -31,6 +35,9 @@ class AIService {
       } catch (err: any) {
         console.error('OpenAI generation failed, falling back to local systems:', err.message);
       }
+    }
+    else{
+      console.log("no openai")
     }
 
     // 2. Try Ollama (Local LLM)
@@ -50,8 +57,10 @@ class AIService {
 
       if (response.ok) {
         const data: any = await response.json();
+      console.log("message is " + data.message?.content);
         return data.message?.content || 'No content from local Ollama.';
       }
+      console.log("no message ");
     } catch (err: any) {
       console.log('Ollama is not running, using high-fidelity mock LLM simulation.');
     }
