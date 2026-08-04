@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar Styles for premium dashboard feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Neon glow borders */
+.glow-indigo {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, rgba(30, 41, 59, 0.4) 25%, rgba(51, 65, 85, 0.6) 50%, rgba(30, 41, 59, 0.4) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Cursor blinking animation for the simulated terminal */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor::after {
+  content: '█';
+  animation: blink 1s infinite;
+  color: #38bdf8;
+  margin-left: 2px;
+  font-size: 0.85em;
+}
+
+/* Custom code editor syntax coloring variables */
+.editor-keyword { color: #f43f5e; }
+.editor-string { color: #10b981; }
+.editor-number { color: #f59e0b; }
+.editor-comment { color: #64748b; font-style: italic; }
+.editor-builtin { color: #38bdf8; }
+.editor-function { color: #a855f7; }
