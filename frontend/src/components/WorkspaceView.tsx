@@ -14,6 +14,7 @@ import {
   CheckCircle,
   Loader
 } from 'lucide-react';
+import { WorkspaceFile } from '../store';
 
 export const WorkspaceView: React.FC = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,22 @@ export const WorkspaceView: React.FC = () => {
   };
 
   const saveFile = async () => {
+  const newFile: WorkspaceFile = {
+    path: 'test.js',
+    name: 'hi',
+    content: 'hi aswathy',
+    language: 'javascript'
+  };
+
+  dispatch(workspaceActions.addFile(newFile));
+  const newFile1: WorkspaceFile = {
+    path: 'new.js',
+    name: 'aswathy',
+    content: 'good mornig',
+    language: 'javascript'
+  };
+
+  dispatch(workspaceActions.addFile(newFile1));
     setSaveStatus('saving');
     try {
       const res = await fetch('http://localhost:5000/api/files', {
@@ -277,7 +294,7 @@ export const WorkspaceView: React.FC = () => {
                 <Loader className="w-8 h-8 text-indigo-500 animate-spin" />
                 <span className="text-slate-500 font-medium">AI Agent generating solution...</span>
               </div>
-            ) : aiResponse ? (
+            ) : aiResponse ? (  // if ai generated responce in any way(openAi, Ollama, hardcoded ...)
               <div className="whitespace-pre-wrap font-sans space-y-3 prose prose-invert">
                 {/* Parse Markdown headings and warnings */}
                 {aiResponse.split('\n').map((line, idx) => {

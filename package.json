@@ -12,6 +12,8 @@
     "build": "npm run build:backend && npm run build:frontend"
   },
   "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1",
     "openai": "^6.49.0"
   },
   "devDependencies": {

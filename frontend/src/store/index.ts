@@ -83,6 +83,9 @@ const workspaceSlice = createSlice({
         state.activeFileContent = file.content;
       }
     },
+    addFile: (state, action: PayloadAction<WorkspaceFile>) => {
+    state.files.push(action.payload);
+  },
     updateActiveContent: (state, action: PayloadAction<string>) => {
       state.activeFileContent = action.payload;
       const file = state.files.find(f => f.path === state.activeFilePath);

@@ -10,10 +10,12 @@ import { dockerService } from './services/dockerService';
 import fileRoutes from './routes/fileRoutes';
 import taskRoutes from './routes/taskRoutes';
 import aiRoutes from './routes/aiRoutes';
+import { connectDB } from "../config/db";
 //import dockerRoutes from './routes/dockerRoutes';
 
 
 dotenv.config();
+connectDB();
 
 const app = express();
 app.use(cors());
