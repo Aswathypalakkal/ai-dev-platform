@@ -1,0 +1,29 @@
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Pull Request Code Review                                                   │
+│ Run security audits, view code diffs, and fetch automated AI code reviews. │
+├───────────────────────┬────────────────────────────────────────────────────┤
+│ ACTIVE PULL REQUESTS  │ PR #102: Add authentication                       │
+│                       │                              ✨ Request AI Review  │
+│ ┌───────────────────┐ │                                                    │
+│ │ PR-101   OPEN     │ │ Added JWT authentication to the API...            │
+│ │ Fix login bug     │ │                                                    │
+│ │ Author: John      │ │ ┌────────────────────────────────────────────────┐ │
+│ │ feature → main    │ │ │ FILE CHANGES: server.js DIFF                   │ │
+│ └───────────────────┘ │ │                                                │ │
+│                       │ │  const app = express();                        │ │
+│ ┌───────────────────┐ │ │- const oldCode = true;                         │ │
+│ │ PR-102   OPEN     │ │ │+ const auth = require('./auth');               │ │
+│ │ Add authentication│ │ │+ app.use(auth);                                │ │
+│ │ Author: Alex      │ │ │                                                │ │
+│ │ feature → main    │ │ └────────────────────────────────────────────────┘ │
+│ └───────────────────┘ │                                                    │
+│                       │ ┌────────────────────────────────────────────────┐ │
+│ ┌───────────────────┐ │ │ ✨ AI AGENT CODE REVIEW                       │ │
+│ │ PR-103   MERGED   │ │ │ Reviewer: AI                                   │ │
+│ │ Update API        │ │ │ Approved: No                                   │ │
+│ └───────────────────┘ │ │                                                │ │
+│                       │ │ UNSAFE: Authentication token is exposed...     │ │
+│                       │ │ ### Security Issues                             │ │
+│                       │ │ Consider using environment variables...         │ │
+│                       │ └────────────────────────────────────────────────┘ │
+└───────────────────────┴────────────────────────────────────────────────────┘///////////////////////////////////
