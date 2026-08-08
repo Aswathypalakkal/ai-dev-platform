@@ -32,7 +32,7 @@ export const DashboardView: React.FC = () => {
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
             <Sparkles className="w-3.5 h-3.5" /> AI Engine Online
           </span>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Welcome back, Alex.</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white">Welcome back, Aswathy.</h2>
           <p className="text-slate-300 text-sm md:text-base">
             Your workspace is active. The AI agent recommends performing an review on Pull Request **PR-1** or checking the SQL injection task.
           </p>
