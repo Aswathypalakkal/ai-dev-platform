@@ -21,10 +21,12 @@ export const WorkspaceView: React.FC = () => {
   const { files, activeFilePath, activeFileContent, terminalLogs, aiResponse, isAiLoading } = useSelector(
     (state: RootState) => state.workspace
   );
-
+  const [showSaveDialog,setShowSaveDialog] = useState(false);
   const [termInput, setTermInput] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const [fileName, setFileName] = useState('');
+  const [language, setLanguage] = useState('javascript');
 
   // Fetch file list on mount
   useEffect(() => {
@@ -56,20 +58,13 @@ export const WorkspaceView: React.FC = () => {
     dispatch(workspaceActions.updateActiveContent(e.target.value));
   };
 
-  const saveFile = async () => {
-  const newFile: WorkspaceFile = {
-    path: 'test.js',
-    name: 'hi',
-    content: 'hi aswathy',
-    language: 'javascript'
-  };
-
-  dispatch(workspaceActions.addFile(newFile));
+  const saveFile = async (fileName, language) => {
+  
   const newFile1: WorkspaceFile = {
-    path: 'new.js',
-    name: 'aswathy',
-    content: 'good mornig',
-    language: 'javascript'
+    path: fileName,
+    name: fileName,
+    content: activeFileContent,
+    language: language
   };
 
   dispatch(workspaceActions.addFile(newFile1));
@@ -185,7 +180,7 @@ export const WorkspaceView: React.FC = () => {
 
           {/* Save Button */}
           <button
-            onClick={saveFile}
+            onClick={() => setShowSaveDialog(true)}
             disabled={saveStatus === 'saving'}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition"
           >
@@ -194,6 +189,76 @@ export const WorkspaceView: React.FC = () => {
           </button>
         </div>
       </div>
+      {showSaveDialog && (
+  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6 w-96 shadow-xl">
+      <h2 className="text-lg font-semibold text-white mb-4">
+        Save File
+      </h2>
+
+      {/* Filename */}
+      <label className="block text-sm text-slate-300 mb-2">
+        Filename
+      </label>
+
+      <input
+        type="text"
+        value={fileName}
+        onChange={(e) => setFileName(e.target.value)}
+        placeholder="example.js"
+        className="w-full px-3 py-2 mb-4 bg-slate-800 border border-slate-700 rounded text-white outline-none"
+      />
+
+      {/* Language */}
+      <label className="block text-sm text-slate-300 mb-2">
+        Coding Language
+      </label>
+
+      <select
+        value={language}
+        onChange={(e) => setLanguage(e.target.value)}
+        className="w-full px-3 py-2 mb-6 bg-slate-800 border border-slate-700 rounded text-white outline-none"
+      >
+        <option value="javascript">JavaScript</option>
+        <option value="typescript">TypeScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="cpp">C++</option>
+        <option value="c">C</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="json">JSON</option>
+      </select>
+
+      {/* Buttons */}
+      <div className="flex justify-end gap-3">
+
+        <button
+          onClick={() => setShowSaveDialog(false)}
+          className="px-4 py-2 text-sm bg-slate-800 text-slate-300 rounded hover:bg-slate-700"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            if (!fileName.trim()) {
+              alert("Please enter a filename");
+              return;
+            }
+
+            saveFile(fileName, language);
+            setShowSaveDialog(false);
+          }}
+          className="px-4 py-2 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-500"
+        >
+          Save
+        </button>
+
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Main Workspace Workspace Layout */}
       <div className="flex-1 flex overflow-hidden">
