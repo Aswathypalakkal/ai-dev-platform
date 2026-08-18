@@ -253,7 +253,7 @@ export const TeamChatView: React.FC = () => {
                 <div className="relative rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center min-h-[140px] overflow-hidden">
                   <span className="text-3xl">👨‍💻</span>
                   <div className="absolute bottom-3 left-3 bg-slate-950/80 px-2 py-0.5 rounded text-[10px] text-slate-300 font-medium flex items-center gap-1">
-                    Alex Rivera (You) {!isMuted && <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />}
+                    Aswathy (You) {!isMuted && <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />}
                   </div>
                 </div>
 
