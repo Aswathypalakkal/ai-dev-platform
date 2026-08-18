@@ -33,8 +33,13 @@ export const KanbanView: React.FC = () => {
       const res = await fetch('http://localhost:5000/api/tasks');
       if (res.ok) {
         const data = await res.json();
-        console.log("data is ",data)
-        dispatch(kanbanActions.setTasks(data));
+        console.log("API data:", data);
+      // Convert MongoDB _id to frontend id
+      const formattedTasks = data.tasks.map((task: any) => ({
+        ...task,
+        id: task._id,
+      }));
+      dispatch(kanbanActions.setTasks(formattedTasks));
       }
     } catch (err) {
       console.error('Failed to fetch tasks:', err);
@@ -202,7 +207,7 @@ export const KanbanView: React.FC = () => {
           //const colTasks = tasks[tasks].filter((t) => t.status === col.id);
          // console.log("coltasks are :",colTasks)
 
-          const colTasks = tasks.tasks.filter((t) => t.status === col.id);
+          const colTasks = tasks.filter((t) => t.status === col.id);
           console.log("coltasks are :",colTasks)
           return (
             <div key={col.id} className={`glass-panel rounded-xl border-t-4 ${col.border} p-4 space-y-4 min-h-[400px] flex flex-col`}>

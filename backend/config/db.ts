@@ -22,6 +22,43 @@ export const userSchema = new mongoose.Schema({
     createduser: String
   
 });
+const taskSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+
+    description: {
+      type: String,
+    },
+
+    status: {
+      type: String,
+      enum: ["todo", "in-progress", "in-review", "done"],
+      default: "todo",
+    },
+
+    priority: {
+      type: String,
+      default: "medium",
+    },
+
+    assignee: {
+      type: String,
+    },
+
+    tags: {
+      type: [String],
+      default: [],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const Task = mongoose.model("Task", taskSchema);
 
 const User = mongoose.model("User", userSchema);
 
