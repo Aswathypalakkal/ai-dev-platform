@@ -20,9 +20,7 @@ export const DashboardView: React.FC = () => {
   const containers = useSelector((state: RootState) => state.docker.containers);
 
   // Derive metrics
-  console.log("tasks :",tasks.tasks)
-  console.log("Is array:", Array.isArray(tasks.tasks));
-  const doneTasks = tasks.tasks?.filter(
+  const doneTasks = tasks?.filter(
   t => t.status === 'done'
 ).length || 0;
   const activePRs = prs.filter(p => p.status === 'open').length;
